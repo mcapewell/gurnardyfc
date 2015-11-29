@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    
+    <link rel="stylesheet" href="https://cdn.rawgit.com/twbs/bootstrap/v4-dev/dist/css/bootstrap.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <div class="summary">
+      <div id="homeTeam" class="home"></div>
+      <div class="score score-home">
+        <div id="homeTeamScore"></div>
+      </div>
+      <div class="score score-away">
+        <div id="awayTeamScore"></div>
+      </div>
+      <div id="awayTeam" class="away"></div>
+      <div class="timer">
+        <div>
+          <small id="timer">0'</small>
+        </div>
+      </div>
+    </div>
+    
+    <div style="clear: both;"></div>
+    
+    <div class="container">
+      <ul id="highlights" class="media-list">
+        <li class="media">
+          <div class="media-left">
+            <i class="fa fa-hourglass-start"></i>
+          </div>
+          <div class="media-body">
+            Waiting for match to start
+          </div>
+        </li>
+      </ul>
+    </div>
+    
+    <nav class="navbar navbar-fixed-bottom navbar-dark bg-inverse">
+      <div class="row">
+        <div class="col-xs-4" style="text-align: left;">
+          <div class="btn-group dropup">
+            <button type="button" class="btn btn-sm btn-secondary-outline dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-futbol-o"></i></button>
+            <div id="homeGoal" class="dropdown-menu">
+            </div>
+          </div>
+        </div>
+        <div class="col-xs-4" style="text-align: center;">
+          <button id="kickOff" class="btn btn-sm btn-success-outline"><i class="fa fa-play"></i></button>
+        </div>
+        <div class="col-xs-4" style="text-align: right;">
+          <div class="btn-group dropup">
+            <button type="button" class="btn btn-sm btn-secondary-outline dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-futbol-o"></i></button>
+            <div id="awayGoal" class="dropdown-menu dropdown-menu-right">
+            </div>
+          </div>
+        </div>
+      </div>
+    </nav>
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="https://cdn.rawgit.com/twbs/bootstrap/v4-dev/dist/js/bootstrap.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>

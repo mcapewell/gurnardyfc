@@ -1,0 +1,68 @@
+body {
+	/* Margin bottom by footer height */
+	margin-bottom: 60px;
+}
+
+.summary {
+	background: url(oppm-header-bg.jpg);
+	float: left;
+	width: 100%;
+	padding: 10px 5px 10px 5px;
+}
+
+.home {
+	background-color: rgba(0, 0, 0, 0.498039);
+	width: 40%;
+	text-align: right;
+	float: left;
+	padding-right: 5px;
+	white-space: nowrap;
+	overflow: auto;
+	color: #fff;
+}
+
+.score {
+	width: 10%;
+	text-align: center;
+	float: left;
+}
+
+.score-home {
+	border-left: 2px solid transparent;
+	border-right: 1px solid transparent;
+}
+
+.score-away {
+	border-left: 1px solid transparent;
+	border-right: 2px solid transparent;
+}
+
+.score div,
+.timer div {
+	background-color: #0087ff;
+	color: #fff;
+}
+
+.away {
+	background-color: rgba(0, 0, 0, 0.498039);
+	width: 40%;
+	float: left;
+	padding-left: 5px;
+	white-space: nowrap;
+	overflow: auto;
+	color: #fff;
+}
+
+.timer {
+	width: 20%;
+	text-align: center;
+	float: left;
+	margin-left: 40%;
+	border-top: 2px solid transparent;
+	border-left: 2px solid transparent;
+	border-right: 2px solid transparent;
+}
+
+#highlights {
+	padding-top: 15px;
+}
