@@ -1,0 +1,11 @@
+CACHE MANIFEST
+# Revision: 1
+index.html
+app.js
+style.css
+oppm-header-bg.jpg
+https://cdn.rawgit.com/twbs/bootstrap/v4-dev/dist/css/bootstrap.css
+https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css
+https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js
+https://cdn.rawgit.com/twbs/bootstrap/v4-dev/dist/js/bootstrap.js
+https://cdnjs.cloudflare.com/ajax/libs/knockout/3.4.0/knockout-min.js
