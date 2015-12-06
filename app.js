@@ -1,7 +1,7 @@
 var match = 
 {
-    "awayTeam": {
-        "name": "Rew Valley",
+    "homeTeam": {
+        "name": "Sandown Sea Hawks",
         "squad": [
             {
                 "name": "Someone"
@@ -9,11 +9,23 @@ var match =
         ],
         "goals": ko.observableArray()
     },
-    "homeTeam": {
+    "awayTeam": {
         "name": "Gurnard",
         "squad": [
             {
+                "name": "Aaron"
+            },
+            {
+                "name": "Ben"
+            },
+            {
                 "name": "Charley"
+            },
+            {
+                "name": "Hercules"
+            },
+            {
+                "name": "Jay"
             },
             {
                 "name": "Jeremy"
@@ -27,18 +39,6 @@ var match =
             {
                 "name": "Toby"
             },
-            {
-                "name": "Hercules"
-            },
-            {
-                "name": "Ben"
-            },
-            {
-                "name": "Jay"
-            },
-            {
-                "name": "Aaron"
-            }
         ],
         "goals": ko.observableArray()
     },
