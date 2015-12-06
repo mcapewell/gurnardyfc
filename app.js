@@ -4,96 +4,79 @@ var match =
         "name": "Rew Valley",
         "squad": [
             {
-                "num": 0,
                 "name": "Someone"
             }
         ],
-        "goals": []
+        "goals": ko.observableArray()
     },
     "homeTeam": {
         "name": "Gurnard",
         "squad": [
             {
-                "num": 1,
                 "name": "Charley"
             },
             {
-                "num": 4,
                 "name": "Jeremy"
             },
             {
-                "num": 8,
                 "name": "Luca"
             },
             {
-                "num": 10,
                 "name": "Sef"
             },
             {
-                "num": 0,
                 "name": "Toby"
             },
             {
-                "num": 0,
                 "name": "Hercules"
             },
             {
-                "num": 0,
                 "name": "Ben"
             },
             {
-                "num": 0,
                 "name": "Jay"
             },
             {
-                "num": 0,
                 "name": "Aaron"
             }
         ],
-        "goals": []
+        "goals": ko.observableArray()
+    },
+    "highlights": ko.observableArray(),
+    "currentMatchTime": ko.observable(0),
+    
+    addHighlight: function(type, message) {
+        this.highlights.unshift({"type": type, "message": message});
     }
 };
 
-var matchState = "Fixture";
+var matchState = "Fixture"; //TODO: replace with a state machine?
 
 function init() {
-    $("#homeTeam").html(match.homeTeam.name);
-    $("#awayTeam").html(match.awayTeam.name);
-    countGoals();
+    ko.applyBindings(match); //TODO: rename to viewModel?
     
-    $.each(match.homeTeam.squad, function(index, value) {
-        $("#homeGoal").append("<a class=\"dropdown-item\" href=\"#\">" + value.name + "</a>");
-    })
+    $("#homeGoal a").on("click", function(event) {
+        scoreHomeGoal(this.text);
+        event.preventDefault();
+    });
     
-    $.each(match.awayTeam.squad, function(index, value) {
-        $("#awayGoal").append("<a class=\"dropdown-item\" href=\"#\">" + value.name + "</a>");
-    })
-    
-    $("#homeGoal a").on("click", function(event){scoreHomeGoal(this.text);event.preventDefault();});
     $("#kickOff").on("click", kickOff);
-    $("#awayGoal a").on("click", function(event){scoreAwayGoal(this.text);event.preventDefault();});
-}
-
-function countGoals() {
-    $("#homeTeamScore").html(match.homeTeam.goals.length);
-    $("#awayTeamScore").html(match.awayTeam.goals.length);
+    
+    $("#awayGoal a").on("click", function(event) {
+        scoreAwayGoal(this.text);
+        event.preventDefault();
+    });
+    
+    match.addHighlight("fa-hourglass-start", "Waiting for match to start");
 }
 
 function scoreHomeGoal(name) {
     switch(matchState) {
         case "PlayingFirstHalf":
-            var minute = getCurrentMatchTime();
-            if (minute > 20) minute = 19;
-            match.homeTeam.goals.push({"name": name, "minute": minute})
-            highlightGoal(match.homeTeam.name, name, minute);
-            countGoals();
-            break;
         case "PlayingSecondHalf":
-            var minute = getCurrentMatchTime();
-            if (minute > 40) minute = 40;
-            match.homeTeam.goals.push({"name": name, "minute": minute})
-            highlightGoal(match.homeTeam.name, name, minute);
-            countGoals();
+            var minute = match.currentMatchTime();
+            match.homeTeam.goals.push({"name": name, "minute": minute, "half": ((matchState == "PlayingFirstHalf") ? 1 : 2)});
+            match.addHighlight("fa-futbol-o", minute + "' " + name + " scores a goal for " + match.homeTeam.name + "!");
             break;
     }
 }
@@ -101,24 +84,12 @@ function scoreHomeGoal(name) {
 function scoreAwayGoal(name) {
     switch(matchState) {
         case "PlayingFirstHalf":
-            var minute = getCurrentMatchTime();
-            if (minute > 20) minute = 19;
-            match.awayTeam.goals.push({"name": name, "minute": minute})
-            highlightGoal(match.awayTeam.name, name, minute);
-            countGoals();
-            break;
         case "PlayingSecondHalf":
-            var minute = getCurrentMatchTime();
-            if (minute > 40) minute = 40;
-            match.awayTeam.goals.push({"name": name, "minute": minute})
-            highlightGoal(match.awayTeam.name, name, minute);
-            countGoals();
+            var minute = match.currentMatchTime();
+            match.awayTeam.goals.push({"name": name, "minute": minute, "half": ((matchState == "PlayingFirstHalf") ? 1 : 2)});
+            match.addHighlight("fa-futbol-o", minute + "' " + name + " scores a goal for " + match.awayTeam.name + "!");
             break;
     }
-}
-
-function highlightGoal(team, player, minute) {
-    $("#highlights").prepend("<li class=\"media\"><div class=\"media-left\"><i class=\"fa fa-futbol-o\"></i></div><div class=\"media-body\">" + minute + "' " + player + " scores a goal for " + team + "!</div></li>");
 }
 
 function kickOff() {
@@ -128,7 +99,7 @@ function kickOff() {
             matchState = "PlayingFirstHalf";
             $("#kickOff").html("<i class=\"fa fa-stop\"></i>");
             $("#kickOff").removeClass("btn-success-outline").addClass("btn-danger-outline");
-            $("#highlights").prepend("<li class=\"media\"><div class=\"media-left\"><i class=\"fa fa-flag-o\"></i></div><div class=\"media-body\">First Half begins</div></li>");
+            match.addHighlight("fa-flag-o", "First Half begins");
             break;
         case "PlayingFirstHalf":
             stopTimer();
@@ -136,33 +107,33 @@ function kickOff() {
             $("#timer").html("HT 20'");
             $("#kickOff").html("<i class=\"fa fa-play\"></i>");
             $("#kickOff").removeClass("btn-danger-outline").addClass("btn-success-outline");
-            $("#highlights").prepend("<li class=\"media\"><div class=\"media-left\"><i class=\"fa fa-flag-checkered\"></i></div><div class=\"media-body\">Half Time</div></li>");
+            match.addHighlight("fa-flag-checkered", "Half Time");
             break;
         case "HalfTime":
             startTimer();
             matchState = "PlayingSecondHalf";
             $("#kickOff").html("<i class=\"fa fa-stop\"></i>");
             $("#kickOff").removeClass("btn-success-outline").addClass("btn-danger-outline");
-            $("#highlights").prepend("<li class=\"media\"><div class=\"media-left\"><i class=\"fa fa-flag-o\"></i></div><div class=\"media-body\">Second Half begins</div></li>");
+            match.addHighlight("fa-flag-o", "Second Half begins");
             break;
         case "PlayingSecondHalf":
             stopTimer();
             matchState = "FullTime";
             
             var homeFirstHalfGoals = 0;
-            $.each(match.homeTeam.goals, function(index, value) {
-                if (value.minute < 20)
+            $.each(match.homeTeam.goals(), function(index, value) {
+                if (value.half == 1)
                     homeFirstHalfGoals++;
             })
             
             var awayFirstHalfGoals = 0;
-            $.each(match.awayTeam.goals, function(index, value) {
-                if (value.minute < 20)
+            $.each(match.awayTeam.goals(), function(index, value) {
+                if (value.half == 1)
                     awayFirstHalfGoals++;
             })
             
             $("#timer").html("FT 40'<br />HT " + homeFirstHalfGoals + "-" + awayFirstHalfGoals);
-            $("#highlights").prepend("<li class=\"media\"><div class=\"media-left\"><i class=\"fa fa-flag-checkered\"></i></div><div class=\"media-body\">Full Time</div></li>");
+            match.addHighlight("fa-flag-checkered", "Full Time");
             break;
     }
     
@@ -170,27 +141,22 @@ function kickOff() {
 }
 
 var timer;
-var halfStartTime;
 
 function startTimer() {
-    halfStartTime = new Date();
+    var halfStartTime = new Date();
     
     timer = setInterval(function() {
-        $("#timer").html(getCurrentMatchTime() + "'");
+        var interval = new Date() - halfStartTime;
+        
+        if (matchState == "PlayingSecondHalf")
+            match.currentMatchTime(20 + Math.floor(interval / 60000));
+        else
+            match.currentMatchTime(Math.floor(interval / 60000));
     }, 1000);
 }
 
 function stopTimer() {
     clearInterval(timer);
-}
-
-function getCurrentMatchTime() {
-    var interval = new Date() - halfStartTime;
-    
-    if (matchState == "PlayingSecondHalf")
-        return 20 + Math.floor(interval / 60000);
-    else
-        return Math.floor(interval / 60000);
 }
 
 $( document ).ready(function() {

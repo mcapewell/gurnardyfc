@@ -12,17 +12,17 @@
   </head>
   <body>
     <div class="summary">
-      <div id="homeTeam" class="home"></div>
+      <div id="homeTeam" class="home" data-bind="text: homeTeam.name"></div>
       <div class="score score-home">
-        <div id="homeTeamScore"></div>
+        <div id="homeTeamScore" data-bind="text: homeTeam.goals().length"></div>
       </div>
       <div class="score score-away">
-        <div id="awayTeamScore"></div>
+        <div id="awayTeamScore" data-bind="text: awayTeam.goals().length"></div>
       </div>
-      <div id="awayTeam" class="away"></div>
+      <div id="awayTeam" class="away" data-bind="text: awayTeam.name"></div>
       <div class="timer">
         <div>
-          <small id="timer">0'</small>
+          <small id="timer" data-bind="text: currentMatchTime"></small>
         </div>
       </div>
     </div>
@@ -30,14 +30,12 @@
     <div style="clear: both;"></div>
     
     <div class="container">
-      <ul id="highlights" class="media-list">
+      <ul id="highlights" class="media-list" data-bind="foreach: highlights">
         <li class="media">
           <div class="media-left">
-            <i class="fa fa-hourglass-start"></i>
+            <i class="fa" data-bind="css: type"></i>
           </div>
-          <div class="media-body">
-            Waiting for match to start
-          </div>
+          <div class="media-body" data-bind="text: message"></div>
         </li>
       </ul>
     </div>
@@ -47,7 +45,8 @@
         <div class="col-xs-4" style="text-align: left;">
           <div class="btn-group dropup">
             <button type="button" class="btn btn-sm btn-secondary-outline dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-futbol-o"></i></button>
-            <div id="homeGoal" class="dropdown-menu">
+            <div id="homeGoal" class="dropdown-menu" data-bind="foreach: homeTeam.squad">
+              <a class="dropdown-item" href="#" data-bind="text: name"></a>
             </div>
           </div>
         </div>
@@ -57,7 +56,8 @@
         <div class="col-xs-4" style="text-align: right;">
           <div class="btn-group dropup">
             <button type="button" class="btn btn-sm btn-secondary-outline dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-futbol-o"></i></button>
-            <div id="awayGoal" class="dropdown-menu dropdown-menu-right">
+            <div id="awayGoal" class="dropdown-menu dropdown-menu-right" data-bind="foreach: awayTeam.squad">
+              <a class="dropdown-item" href="#" data-bind="text: name"></a>
             </div>
           </div>
         </div>
@@ -66,6 +66,7 @@
     
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
     <script src="https://cdn.rawgit.com/twbs/bootstrap/v4-dev/dist/js/bootstrap.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.4.0/knockout-min.js"></script>
     <script src="app.js"></script>
   </body>
 </html>
