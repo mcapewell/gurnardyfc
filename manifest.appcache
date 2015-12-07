@@ -1,11 +1,17 @@
 CACHE MANIFEST
-# Revision: 2
+# Revision: 3
 index.html
 app.js
 style.css
 oppm-header-bg.jpg
 http://cdn.rawgit.com/twbs/bootstrap/v4-dev/dist/css/bootstrap.css
 http://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css
+http://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/fonts/fontawesome-webfont.eot?v=4.5.0
+http://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/fonts/fontawesome-webfont.eot?#iefix&v=4.5.0
+http://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/fonts/fontawesome-webfont.woff2?v=4.5.0
+http://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/fonts/fontawesome-webfont.woff?v=4.5.0
+http://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/fonts/fontawesome-webfont.ttf?v=4.5.0
+http://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/fonts/fontawesome-webfont.svg?v=4.5.0#fontawesomeregular
 http://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js
 http://cdn.rawgit.com/twbs/bootstrap/v4-dev/dist/js/bootstrap.js
 http://cdnjs.cloudflare.com/ajax/libs/knockout/3.4.0/knockout-min.js
