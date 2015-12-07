@@ -50,6 +50,15 @@ var match =
     }
 };
 
+match.formattedMatchTime = ko.pureComputed(function() {
+    if (matchState == "PlayingFirstHalf" && this.currentMatchTime() > 20)
+        return "20' +" + (this.currentMatchTime() - 20);
+    else if (matchState == "PlayingSecondHalf" && this.currentMatchTime() > 40)
+        return "40' +" + (this.currentMatchTime() - 40);
+    else
+        return this.currentMatchTime() + "'";
+}, match);
+
 var matchState = "Fixture"; //TODO: replace with a state machine?
 
 function init() {
@@ -159,6 +168,6 @@ function stopTimer() {
     clearInterval(timer);
 }
 
-$( document ).ready(function() {
+$(document).ready(function() {
     init();
 });
