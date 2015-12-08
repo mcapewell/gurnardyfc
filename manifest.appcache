@@ -1,9 +1,12 @@
 CACHE MANIFEST
-# Revision: 6
+# Revision: 7
 index.html
 app.js
 style.css
 oppm-header-bg.jpg
+apple-touch-icon.png
+favicon.ico
+startup.png
 http://cdn.rawgit.com/twbs/bootstrap/v4-dev/dist/css/bootstrap.css
 http://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css
 http://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/fonts/fontawesome-webfont.eot?v=4.5.0
