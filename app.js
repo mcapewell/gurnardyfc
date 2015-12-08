@@ -83,9 +83,8 @@ function scoreHomeGoal(name) {
     switch(matchState) {
         case "PlayingFirstHalf":
         case "PlayingSecondHalf":
-            var minute = match.currentMatchTime();
-            match.homeTeam.goals.push({"name": name, "minute": minute, "half": ((matchState == "PlayingFirstHalf") ? 1 : 2)});
-            match.addHighlight("fa-futbol-o", minute + "' " + name + " scores a goal for " + match.homeTeam.name + "!");
+            match.homeTeam.goals.push({"name": name, "minute": match.currentMatchTime(), "half": ((matchState == "PlayingFirstHalf") ? 1 : 2)});
+            match.addHighlight("fa-futbol-o", match.formattedMatchTime() + " " + name + " scores a goal for " + match.homeTeam.name + "!");
             break;
     }
 }
@@ -94,9 +93,8 @@ function scoreAwayGoal(name) {
     switch(matchState) {
         case "PlayingFirstHalf":
         case "PlayingSecondHalf":
-            var minute = match.currentMatchTime();
-            match.awayTeam.goals.push({"name": name, "minute": minute, "half": ((matchState == "PlayingFirstHalf") ? 1 : 2)});
-            match.addHighlight("fa-futbol-o", minute + "' " + name + " scores a goal for " + match.awayTeam.name + "!");
+            match.awayTeam.goals.push({"name": name, "minute": match.currentMatchTime(), "half": ((matchState == "PlayingFirstHalf") ? 1 : 2)});
+            match.addHighlight("fa-futbol-o", match.formattedMatchTime() + " " + name + " scores a goal for " + match.awayTeam.name + "!");
             break;
     }
 }
@@ -113,7 +111,7 @@ function kickOff() {
         case "PlayingFirstHalf":
             stopTimer();
             matchState = "HalfTime";
-            $("#timer").html("HT 20'");
+            $("#timer").prepend("HT ");
             $("#kickOff").html("<i class=\"fa fa-play\"></i>");
             $("#kickOff").removeClass("btn-danger-outline").addClass("btn-success-outline");
             match.addHighlight("fa-flag-checkered", "Half Time");
@@ -141,7 +139,7 @@ function kickOff() {
                     awayFirstHalfGoals++;
             })
             
-            $("#timer").html("FT 40'<br />HT " + homeFirstHalfGoals + "-" + awayFirstHalfGoals);
+            $("#timer").prepend("FT ").append("<br />HT " + homeFirstHalfGoals + "-" + awayFirstHalfGoals);
             match.addHighlight("fa-flag-checkered", "Full Time");
             break;
     }
