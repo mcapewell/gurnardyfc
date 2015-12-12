@@ -1,7 +1,7 @@
 var match = 
 {
-    "homeTeam": {
-        "name": "Sandown Sea Hawks",
+    "awayTeam": {
+        "name": "Sandown",
         "squad": [
             {
                 "name": "Someone"
@@ -9,7 +9,7 @@ var match =
         ],
         "goals": ko.observableArray()
     },
-    "awayTeam": {
+    "homeTeam": {
         "name": "Gurnard",
         "squad": [
             {
