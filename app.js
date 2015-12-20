@@ -1,7 +1,7 @@
 var match = 
 {
     "awayTeam": {
-        "name": "Sandown",
+        "name": "West Wight",
         "squad": [
             {
                 "name": "Someone"
